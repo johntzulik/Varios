@@ -1,0 +1,31 @@
+<script>
+function reportWindowSize(sizeWidth) {
+    var ddmg = document.querySelector("#ddmg");
+    var ddmgmobile = document.getElementById('ddmgmobile');
+    var ddmgdesktop = document.getElementById('ddmgdesktop');    
+    var screen = sizeWidth > 767 ? "desktop" : "mobile";
+    if(screen == 'desktop'){//if desktop
+        
+        ddmgdesktop.appendChild(ddmg);
+        while (ddmgmobile.childNodes.length > 0) {
+                ddmgdesktop.appendChild(ddmgmobile.childNodes[0]);
+        }
+    }
+    if(screen == 'mobile'){//if mobile
+        ddmgmobile.appendChild(ddmg);
+        while (ddmgdesktop.childNodes.length > 0) {
+            ddmgmobile.appendChild(ddmgdesktop.childNodes[0]);
+        }
+    }
+}
+window.addEventListener("resize", function(){
+    reportWindowSize(window.innerWidth);
+}, true);
+var reactwait = setInterval(function(){ 
+    if(document.querySelectorAll("#ddmg").length > 0){
+        clearInterval(reactwait);
+        reportWindowSize(window.innerWidth);
+    }
+},10);
+</script>
+<div id="ddmgdesktop"></div>
