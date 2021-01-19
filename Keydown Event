@@ -1,0 +1,15 @@
+        // Other Amount - Keydown Event
+        //var other = document.getElementById("donation-input");
+        other.addEventListener('keydown', function(e) {
+
+            e = e || window.event;
+            
+            var decimal = this.value.split('.');
+            var charCode = e.keyCode || e.which;
+            
+            var accepted = [8, 37, 39, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 110, 190];
+            if ( e.ctrlKey || e.shiftKey || (decimal.length > 1 && (charCode === 110 || charCode === 190)) || accepted.indexOf(charCode) == -1 ) {
+                console.log('Invalid character entered');
+                e.preventDefault();
+            } 
+        });
