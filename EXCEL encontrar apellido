@@ -1,0 +1,8 @@
+=DERECHA(A2,LARGO(A2)
+-ENCONTRAR("*",
+SUSTITUIR(
+        A2," ","*",
+        LARGO(A2)-LARGO(SUSTITUIR(A2," ",""))
+        )
+    )
+)
