@@ -1,0 +1,33 @@
+<script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=URLSearchParams"></script>
+<script>
+var queryString = window.location.search,
+urlParams = new URLSearchParams(queryString),
+chosen = (urlParams.get('chosen') !== null) ? urlParams.get('chosen') : false;
+var selected =false;
+
+function chosenAmount(chosenValue){
+    console.log(document.querySelectorAll(".donation-level-container").length);
+    var otherAmount = document.querySelector("#user-entered-row > div > div > div.donation-level-label-input-container > input").getAttribute("id");
+    var otherAmountValue = document.querySelector("#level_standard_row > div > div.donation-levels > div:nth-child(11) > div > div > div.donation-level-user-entered > input").getAttribute('id')
+    var ga = document.querySelectorAll(".donation-level-container > div.form-content > .donation-level-input-container > label > .donation-level-label-container")
+    for(i=0; i< ga.length; i++){
+        var amount = ga[i].innerText.replace('$', '').replace(',', '')
+        var id = ga[i].parentNode.parentNode.firstElementChild.firstElementChild.getAttribute('id')        
+        if(chosenValue == amount && !selected){
+            document.getElementById(id).click()
+            selected = true;
+        }
+    }
+    if(!selected){
+        document.getElementById(otherAmount).click()
+        document.getElementById(otherAmountValue).value = chosenValue
+    }
+}
+
+var reactwait = setInterval(function(){ 
+    if(document.querySelectorAll("#user-entered-row").length > 0){
+        clearInterval(reactwait);
+        chosen ? chosenAmount(chosen):false;
+    }
+}, 100);
+</script>
