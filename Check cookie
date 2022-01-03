@@ -1,0 +1,6 @@
+console.log('Now: ' + new Date().toGMTString())
+cookieStore.get('lb_tlrca_2021_year_end').then(function (f) {
+var date = new Date();
+date.setTime(f.expires);
+console.log('Expire: ' + date.toGMTString())
+});
