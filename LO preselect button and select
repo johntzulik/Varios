@@ -1,0 +1,23 @@
+//this is for XFBRO
+<script>
+//this script should fix the issue on preselect values
+var reactwait = setInterval(function(){ 
+    if(document.querySelectorAll(".one-time").length > 5 ){
+        clearInterval(reactwait);
+        console.log("---preselecting 50")
+        document.querySelector("#level_standardexpanded10866").click()
+    }
+}, 100);
+</script>
+
+
+//this is for PAZRM
+<script>
+//this script should fix the issue on preselect monthly values
+var reactwait = setInterval(function(){ 
+    if(document.querySelectorAll(".donation-level-container").length > 6 ){
+        clearInterval(reactwait);
+        document.getElementById('level_flexibleduration').value = "M:0";
+    }
+}, 100);
+</script>
