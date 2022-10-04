@@ -1,0 +1,42 @@
+
+/* Donate now */
+function donatenow_function($atts, $content = '') { 
+	 $args = shortcode_atts(
+        array(
+            'cl' => '',
+            'pg' => '',
+			'appeal' => '',
+			'amt' => '',
+			'version' => '',
+			'monthly' => '',
+			'textbutton' => ''
+        ),
+        $atts
+    );
+
+    extract( $args, EXTR_OVERWRITE);
+	
+	$cl = $cl !=''? $cl : 'LAM'; 
+	$pg = $pg !=''? $pg : 'main';
+	$appeal = $appeal !=''? $appeal : 'DIGI-HOME';
+	$amt = $amt !=''? $amt : '35,50,75,100';
+	$version = $version !=''? $version : 'full';
+	$monthly = $monthly !=''? $monthly : '';
+	$textbutton = $textbutton !=''? $textbutton : 'DONATE NOW';
+
+	$output = "
+		<form role='search' method='get' class='donate-form search-form donate-form-without-input' 
+		action='https://give.losangelesmission.org/production'>
+			<input type='hidden' name='cl' value='".$cl."'/>
+			<input type='hidden' name='pg' value='".$pg."'/>
+			<input type='hidden' name='appeal' value='".$appeal."'/>
+			<input type='hidden' name='amt' value='".$amt."'/>
+			<input type='hidden' name='version' value='".$version."'/>
+			<input type='hidden' name='monthly' value='".$monthly."'/>
+			<input type='submit' class='search-submit' value='".$textbutton."'/>
+		</form>
+	";
+	return $output;
+}
+
+add_shortcode('donatenow' , 'donatenow_function');
