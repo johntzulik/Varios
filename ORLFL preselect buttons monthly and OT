@@ -1,25 +1,43 @@
 <script>
-var reactwait = setInterval(function(){ 
-    if(document.querySelectorAll(".gift-array-item").length >= 10){
+    var urlParams = new URLSearchParams(window.location.search);
+    var reactwait = setInterval(function () {
+      if (document.querySelectorAll(".gift-array-item").length >= 10) {
         clearInterval(reactwait);
-        document.querySelector("#\\35 00").click();
-        document.querySelector("#monthly").addEventListener("click", function(){
-            document.querySelector("#\\35 0").click();
-        });
-
-        document.querySelector("#one-time").addEventListener("click", function(){
-            document.querySelector("#\\35 00").click();
-        });
-var frequency = document.querySelectorAll("#frequency-controls > div.frequency-control")
-frequency.forEach((freq)=>{
-    freq.addEventListener("click", function(){
-        if(freq.innerText == 'Monthly'){
-            document.querySelector("#\\35 0").click();
-        }else{
-            document.querySelector("#\\35 00").click();
+        // if (urlParams.has("chosen") && urlParams.has("monthly")) {
+        //     return
+        // }
+        // if (urlParams.has("chosen") && !urlParams.has("monthly")) {
+        //     return
+        // }
+        if (!urlParams.has("chosen") && urlParams.has("monthly")) {
+            document.querySelector("#monthly-buttons > #\\35 0").click();
         }
-    });
-});
-    }
-}, 100);
-</script>
+        if (!urlParams.has("chosen") && !urlParams.has("monthly")) {
+            document.querySelector("#one-time-buttons > #\\31 00").click();
+        }
+          document
+            .querySelector("#monthly")
+            .addEventListener("click", function () {
+              document.querySelector("#\\35 0").click();
+            });
+          document
+            .querySelector("#one-time")
+            .addEventListener("click", function () {
+              document.querySelector("#one-time-buttons > #\\31 00").click();
+            });
+  
+        var frequency = document.querySelectorAll(
+          "#frequency-controls > div.frequency-control"
+        );
+        frequency.forEach((freq) => {
+          freq.addEventListener("click", function () {
+            if (freq.innerText == "Monthly") {
+              document.querySelector("#\\35 0").click();
+            } else {
+              document.querySelector("#one-time-buttons > #\\31 00").click();
+            }
+          });
+        });
+      }
+    }, 100);
+  </script>
