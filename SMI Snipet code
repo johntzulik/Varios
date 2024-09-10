@@ -1,0 +1,45 @@
+/*
+This scripts is able to get the parameters and add it to the iframe and charge it with it dynamically
+*/
+
+<script>
+  var urlParams = new URLSearchParams(window.location.search);
+  document.addEventListener("DOMContentLoaded", function () {
+    const iframe = document.createElement("iframe"),
+    sourceArray = ['source', 'SOURCE', 'source_code', 'SOURCE_CODE', 's_src', 'S_SRC'], 
+    purposeArray = ['purpose', 'PURPOSE', 'purpose_code', 'PURPOSE_CODE'],
+    keyArray = ['key', 'KEY', 'key_code', 'KEY_CODE'], 
+    otherAmountArray = ['other_amount', 'OTHER_AMOUNT'],
+    ignoreMailingArray = ['ignore_mailing', 'IGNORE_MAILING'],
+    monthlyArray = ['monthly','MONTHLY'];
+
+    var purposeCode = "JS", keyCode = "JS824", ignoreMailingCode = "YES",monthlyCode = '';
+      url='https://donate.salesianmissions.org/SalDonate/DonatePlain/DonationPlain.aspx?';
+
+      // needs to verify if the url parameter contains any of those parameters
+      const purpose = getParamValueFromUrl(purposeArray,'PURPOSE_CODE=',purposeCode);
+      const key = getParamValueFromUrl(keyArray,'&KEY_CODE=',keyCode);
+      const source = getParamValueFromUrl(sourceArray,'&SOURCE_CODE=');
+      const ignoreMailing = getParamValueFromUrl(ignoreMailingArray,"&IGNORE_MAILING=",ignoreMailingCode);
+      const otherAmount = getParamValueFromUrl(otherAmountArray,'&OTHER_AMOUNT=');
+      const monthly = getParamValueFromUrl(monthlyArray,'&MONTHLY=');
+ 
+    iframe.src = url+purpose+key+source+ignoreMailing+otherAmount+monthly;
+    iframe.width = "100%";
+    iframe.loading = "lazy";
+    iframe.frameborder = "0";
+    iframe.scrolling = "no";
+    iframe.style = "min-height:2300px;border: 0px;";
+    iframe.onload="if(window.myFrameChange !== undefined) {window.parent.document.getElementById('donateFrame').scrollIntoView();}window.myFrameChange=true;";
+    // Add to div element with class named frameDiv
+    const frameDiv = document.querySelector("div.frameDiv");
+    frameDiv.appendChild(iframe);
+  });
+
+  function getParamValueFromUrl(paramArray, paramName, defaultValue = '') {
+  const urlParams = new URLSearchParams(window.location.search);
+  const foundParam = paramArray.find(param => urlParams.has(param));
+  return foundParam ? paramName+urlParams.get(foundParam) : defaultValue === '' ? '' : paramName+defaultValue;
+}
+</script>
+<div class="frameDiv"></div>
