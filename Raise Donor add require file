@@ -1,0 +1,34 @@
+<script>
+//adding a require filed for phone
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelector("#sub-options > div.col-xl-8").classList.add('offset-xl-1');
+    document.querySelector("#sub-options > div.col-xl-8").classList.remove('offset-xl-2');
+    document.querySelector("#cphDonationForm_txtPhone").setAttribute('data-parsley-required','true');
+    document.querySelector("#cphDonationForm_txtPhone").setAttribute('data-parsley-error-message','Phone is required');
+    document.querySelector("#cphDonationForm_txtPhone").setAttribute('data-parsley-pattern','^(?:[0-9]{10}|[0-9]{3}-[0-9]{3}-[0-9]{4})$');
+    document.querySelector("#cphDonationForm_txtPhone").setAttribute('data-parsley-pattern-message','Zip Code must be in the correct format');
+    document.querySelector("#cphDonationForm_txtPhone").setAttribute('inputmode','numeric');
+    const labelElement = document.querySelector('label[for="cphDonationForm_txtPhone"]');
+    const spanElement = document.createElement('span');
+    spanElement.className = 'req';
+    spanElement.textContent = '*';
+    labelElement.appendChild(document.createTextNode(' '));
+    labelElement.appendChild(spanElement);    
+});
+
+
+
+//moving the GDRP field
+document.addEventListener('DOMContentLoaded', function() {
+  const targetFormGroup = document.querySelector("#address > fieldset > div > div:nth-child(4)");
+  const subOptionsSection = document.querySelector("#sub-options > div");
+  if(subOptionsSection && targetFormGroup) {
+    const currentParent = subOptionsSection.parentNode;
+    targetFormGroup.parentNode.insertBefore(subOptionsSection, targetFormGroup);
+    if(currentParent.contains(subOptionsSection)) {
+      currentParent.removeChild(subOptionsSection);
+    }
+  }
+  document.querySelector("#address > fieldset > div > div.col-xl-8.offset-xl-2").classList.remove('offset-xl-2');
+});
+</script>
